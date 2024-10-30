@@ -39,9 +39,9 @@ namespace PhoneBookApi.DataAccess.EFCoreBase.Concrete
             }
         }
 
-        public async Task<Person> GetActivePersonById(int id)
+        public async Task<Person?> GetActivePersonById(int id)
         {
-            return await _dbContext.Persons.FirstOrDefaultAsync(p => p.PersonID == id);
+            return await _dbContext.Persons.FirstOrDefaultAsync(p => p.PersonID == id && p.IsActive);
         }
 
         public IQueryable<Person> GetAllActivePersons()

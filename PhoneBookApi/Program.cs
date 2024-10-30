@@ -5,13 +5,12 @@ using PhoneBookApi.Core.ValidationRules;
 using PhoneBookApi.DataAccess.EFCoreBase;
 using PhoneBookApi.DataAccess.EFCoreBase.Abstract;
 using PhoneBookApi.DataAccess.EFCoreBase.Concrete;
-using PhoneBookApi.Models.Concrete;
 using PhoneBookApi.Models.DTO;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddCors(options =>
+/*builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
         builder =>
@@ -20,7 +19,8 @@ builder.Services.AddCors(options =>
                    .AllowAnyMethod()
                    .AllowAnyHeader();
         });
-});
+});*/
+
 
 // Add services to the container.
 

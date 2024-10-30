@@ -1,4 +1,6 @@
-﻿using PhoneBookApi.Models.DTO;
+﻿using Microsoft.AspNetCore.Mvc;
+using PhoneBookApi.Models.Concrete;
+using PhoneBookApi.Models.DTO;
 
 namespace PhoneBookUI.ApiServices
 {
@@ -18,5 +20,6 @@ namespace PhoneBookUI.ApiServices
 
             return await response.Content.ReadFromJsonAsync<IEnumerable<PersonDTO>>();
         }
+
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PhoneBookApi.Models.DTO;
 using PhoneBookUI.ApiServices;
 using PhoneBookUI.Models;
 using System.Diagnostics;
@@ -9,6 +10,7 @@ namespace PhoneBookUI.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly PersonApiService _service;
+
         public HomeController(ILogger<HomeController> logger, PersonApiService service)
         {
             _logger = logger;
@@ -25,6 +27,13 @@ namespace PhoneBookUI.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> AddPage()
+        {
+            return View();
+        }
+
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

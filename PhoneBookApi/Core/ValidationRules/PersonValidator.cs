@@ -12,7 +12,7 @@ namespace PhoneBookApi.Core.ValidationRules
                 .NotEmpty()
                 .WithMessage("Email alanı asla boş kalamaz!")
                 .EmailAddress();
-
+            
             RuleFor(p => p.PhoneNumber)
                 .NotEmpty()
                 .WithMessage("Phone Number alanı asla boş kalamaz!")
