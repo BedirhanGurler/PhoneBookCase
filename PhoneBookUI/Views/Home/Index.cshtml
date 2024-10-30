@@ -1,0 +1,41 @@
+﻿@using PhoneBookApi.Models.DTO
+@model IEnumerable<PersonDTO>
+
+<h2>Active Persons</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var person in Model)
+            {
+                <tr>
+                    <td>@person.FullName</td>
+                    <td>@person.PhoneNumber</td>
+                    <td>@person.Email</td>
+                    <td>@person.CategoryName</td>
+                    <td>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+
+                </tr>
+            }
+
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">No active persons found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
