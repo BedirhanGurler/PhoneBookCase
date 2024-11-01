@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhoneBookApi.Models.Concrete;
 using PhoneBookApi.Models.DTO;
+using System.Text;
+using System.Text.Json;
 
 namespace PhoneBookUI.ApiServices
 {
@@ -39,6 +41,15 @@ namespace PhoneBookUI.ApiServices
         public async Task DeletePersonAsync(int id)
         {
             var response = await _httpClient.DeleteAsync($"api/Persons/delete-person/{id}");
+            response.EnsureSuccessStatusCode();
+        }
+
+
+        public async Task AddCategoryAsync(CategoryDTO category)
+        {
+            
+            var response = await _httpClient.PostAsJsonAsync("api/Categories/add-category", category);
+
             response.EnsureSuccessStatusCode();
         }
     }

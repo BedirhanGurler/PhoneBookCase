@@ -1,0 +1,41 @@
+﻿@using PhoneBookApi.Models.DTO
+@model CategoryDTO
+
+@{
+    ViewData["Title"] = "Kategori Ekle";
+}
+
+<h2>Yeni Kategori Ekle</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddCategory" method="post" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="CategoryName" class="form-label">Kategori Adı:</label>
+                <input type="text" class="form-control" id="CategoryName" name="CategoryName" required />
+                <div class="invalid-feedback">
+                    Lütfen kategori adını girin.
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Ekle</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Bootstrap için istemci tarafında doğrulama
+    (function () {
+        'use strict';
+        var forms = document.querySelectorAll('.needs-validation');
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>

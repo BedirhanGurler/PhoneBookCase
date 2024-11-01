@@ -1,6 +1,7 @@
 ﻿using PhoneBookApi.Business.Abstract;
 using PhoneBookApi.DataAccess.EFCoreBase.Abstract;
 using PhoneBookApi.Models.Concrete;
+using PhoneBookApi.Models.DTO;
 
 namespace PhoneBookApi.Business.Concrete
 {
@@ -12,9 +13,9 @@ namespace PhoneBookApi.Business.Concrete
             _categoryRepo = categoryRepo;
         }
 
-        public async Task AddCategory(Category category)
+        public async Task AddCategory(CategoryDTO categoryDTO)
         {
-            await _categoryRepo.AddCategory(category);
+            await _categoryRepo.AddCategory(categoryDTO);
         }
 
         public async Task DeleteCategory(int id)

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBookApi.Business.Abstract;
+using PhoneBookApi.Models.Concrete;
+using PhoneBookApi.Models.DTO;
 
 namespace PhoneBookApi.Controllers
 {
@@ -20,6 +22,13 @@ namespace PhoneBookApi.Controllers
         {
             var category = await _category.GetAllAsync();
             return Ok(category);
+        }
+
+        [HttpPost("add-category")]
+        public async Task<IActionResult> CreateNewCategory([FromBody] CategoryDTO categoryDTO)
+        {
+            await _category.AddCategory(categoryDTO);
+            return Ok(categoryDTO);
         }
     }
 }

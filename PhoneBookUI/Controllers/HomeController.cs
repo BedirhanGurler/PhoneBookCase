@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PhoneBookApi.Models.Concrete;
 using PhoneBookApi.Models.DTO;
 using PhoneBookUI.ApiServices;
 using PhoneBookUI.Models;
@@ -51,10 +52,31 @@ namespace PhoneBookUI.Controllers
         [HttpPost]
         public async Task<IActionResult> DeletePerson(int id)
         {
-            _service.DeletePersonAsync(id);
+            await _service.DeletePersonAsync(id);
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> AddCategoryPage()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCategory(CategoryDTO category)
+        {
+            if (ModelState.IsValid)
+            {
+                await _service.AddCategoryAsync(category);
+                return RedirectToAction("Index");
+            }
+            return View("AddCategoryPage");
+        }
+
+        public async Task<IActionResult> Categories()
+        {
+            var categories = await _service.GetCategoriesAsync();
+            return View(categories);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

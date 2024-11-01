@@ -23,6 +23,7 @@ namespace PhoneBookApi.DataAccess.EFCoreBase
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<PersonDTO>().HasNoKey();
+            
         }
 
         public DbSet<Person> Persons { get; set; }

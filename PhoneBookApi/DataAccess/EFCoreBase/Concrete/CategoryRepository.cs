@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PhoneBookApi.DataAccess.EFCoreBase.Abstract;
 using PhoneBookApi.Models.Concrete;
+using PhoneBookApi.Models.DTO;
 
 namespace PhoneBookApi.DataAccess.EFCoreBase.Concrete
 {
@@ -12,8 +13,12 @@ namespace PhoneBookApi.DataAccess.EFCoreBase.Concrete
             _dbContext = dbContext;
         }
 
-        public async Task AddCategory(Category category)
+        public async Task AddCategory(CategoryDTO categoryDTO)
         {
+            var category = new Category
+            {
+                CategoryName = categoryDTO.CategoryName
+            };
             await _dbContext.AddAsync(category);
             await _dbContext.SaveChangesAsync();
         }
