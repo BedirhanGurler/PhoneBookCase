@@ -6,7 +6,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Name</th>
+            <th>Full Name</th>
+            <th>Title</th>
+            <th>Description</th>
             <th>Phone</th>
             <th>Email</th>
             <th>Category</th>
@@ -20,11 +22,16 @@
             {
                 <tr>
                     <td>@person.FullName</td>
+                    <td>@person.Title</td>
+                    <td>@person.Description</td>
                     <td>@person.PhoneNumber</td>
                     <td>@person.Email</td>
                     <td>@person.CategoryName</td>
                     <td>
-                        <button class="btn btn-outline-danger">Delete</button>
+                        <form asp-action="DeletePerson" method="post">
+                            <input type="hidden" name="id" value="@person.PersonID" />
+                            <button type="submit" class="btn btn-outline-danger">Delete</button>
+                        </form>
                     </td>
                 </tr>
             }

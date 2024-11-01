@@ -27,7 +27,7 @@ namespace PhoneBookApi.DataAccess.EFCoreBase
 
         public DbSet<Person> Persons { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<PersonDTO> Pers { get; set; }
+        
 
     }
 }

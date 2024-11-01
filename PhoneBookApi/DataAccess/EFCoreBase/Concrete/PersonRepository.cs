@@ -34,7 +34,7 @@ namespace PhoneBookApi.DataAccess.EFCoreBase.Concrete
             var person = await _dbContext.Persons.FindAsync(id);
             if (person != null)
             {
-                _dbContext.Persons.Remove(person);
+                person.IsActive = false;
                 await _dbContext.SaveChangesAsync();
             }
         }
@@ -51,7 +51,7 @@ namespace PhoneBookApi.DataAccess.EFCoreBase.Concrete
 
         public async Task UpdatePerson(PersonDTO personDto)
         {
-            var existingPerson = await _dbContext.Persons.FindAsync(personDto.PersonID); // Assuming PersonID is the key
+            var existingPerson = await _dbContext.Persons.FindAsync(personDto.PersonID); 
 
             if (existingPerson == null)
             {

@@ -10,7 +10,7 @@ using PhoneBookApi.Models.DTO;
 var builder = WebApplication.CreateBuilder(args);
 
 
-/*builder.Services.AddCors(options =>
+builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
         builder =>
@@ -19,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
                    .AllowAnyMethod()
                    .AllowAnyHeader();
         });
-});*/
+});
 
 
 // Add services to the container.

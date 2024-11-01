@@ -9,7 +9,7 @@
         public string PhoneNumber { get; set; }   
         public string Email { get; set; }
         public int CategoryID { get; set; }
-        public bool IsActive { get; set; }  
+        public bool IsActive { get; set; } = true;
         public string? CategoryName { get; set; } 
     }
 }

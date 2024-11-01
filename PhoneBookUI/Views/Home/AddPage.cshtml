@@ -1,5 +1,80 @@
-﻿@using PhoneBookApi.Models.DTO
-@model PersonDTO
+﻿@model PhoneBookApi.Models.DTO.PersonDTO
+@{
+    ViewBag.Title = "Add Person";
+}
 
-<h2>Add New Person</h2>
+<h2 class="text-center mb-4">Add New Person</h2>
 
+<div class="container">
+    <form asp-action="AddPerson" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="FullName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="FullName" name="FullName" required />
+            <div class="invalid-feedback">
+                Lütfen tam adınızı girin.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="Title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="Title" name="Title" required />
+            <div class="invalid-feedback">
+                Lütfen bir başlık girin.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <textarea class="form-control" id="Description" name="Description" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="PhoneNumber" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" required />
+            <div class="invalid-feedback">
+                Lütfen bir telefon numarası girin.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="Email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="Email" name="Email" required />
+            <div class="invalid-feedback">
+                Lütfen geçerli bir e-posta adresi girin.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="CategoryID" class="form-label">Category</label>
+            <select class="form-select" id="CategoryID" name="CategoryID" required>
+                <option selected disabled value="">Kategori Seçin</option>
+                @foreach (var category in ViewBag.Categories)
+                {
+                    <option value="@category.CategoryID">@category.CategoryName</option>
+                }
+            </select>
+            <div class="invalid-feedback">
+                Lütfen bir kategori seçin.
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Ekle</button>
+    </form>
+</div>
+
+<script>
+    // Bootstrap için istemci tarafında validation rules için doğrulama
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>

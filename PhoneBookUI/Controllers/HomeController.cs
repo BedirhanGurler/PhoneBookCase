@@ -30,10 +30,31 @@ namespace PhoneBookUI.Controllers
 
         public async Task<IActionResult> AddPage()
         {
+            var categories = await _service.GetCategoriesAsync();
+            ViewBag.Categories = categories;
             return View();
         }
 
-       
+        [HttpPost]
+        public async Task<IActionResult> AddPerson(PersonDTO person)
+        {
+            if (ModelState.IsValid)
+            {
+                await _service.AddPersonAsync(person);
+                return RedirectToAction("Index");
+            }
+            var categories = await _service.GetCategoriesAsync();
+            ViewBag.Categories = categories;
+            return View(person);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePerson(int id)
+        {
+            _service.DeletePersonAsync(id);
+            return RedirectToAction("Index");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
