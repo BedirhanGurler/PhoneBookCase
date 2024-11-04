@@ -56,6 +56,30 @@ namespace PhoneBookUI.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> UpdatePersonPage(int id)
+        {
+            var person = await _service.GetPersonByID(id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            var categories = await _service.GetCategoriesAsync();
+            ViewBag.Categories = categories;
+            return View(person);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePerson(PersonDTO person)
+        {
+            await _service.UpdatePersonAsync(person);
+            var categories = await _service.GetCategoriesAsync();
+            ViewBag.Categories = categories;
+            return RedirectToAction("Index");   
+
+
+        }
+
         public async Task<IActionResult> AddCategoryPage()
         {
             return View();

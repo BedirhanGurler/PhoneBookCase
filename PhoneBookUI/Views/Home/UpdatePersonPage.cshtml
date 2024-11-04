@@ -1,0 +1,57 @@
+﻿@using PhoneBookApi.Models.DTO
+@model PersonDTO
+
+<h2>Update Person</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="UpdatePerson" method="post">
+            <input type="hidden" asp-for="PersonID" />
+
+            <div class="mb-3">
+                <label asp-for="FullName" class="form-label">Full Name:</label>
+                <input type="text" asp-for="FullName" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label">Title:</label>
+                <input type="text" asp-for="Title" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label">Description:</label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="PhoneNumber" class="form-label">Phone Number:</label>
+                <input type="text" asp-for="PhoneNumber" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">Email:</label>
+                <input type="email" asp-for="Email" class="form-control" />
+            </div>
+
+       
+
+            <div class="mb-3">
+                <label asp-for="CategoryID" class="form-label">Category:</label>
+                <select class="form-select" id="CategoryID" name="CategoryID" required>
+                    <option disabled value="">Kategori Seçin</option>
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option value="@category.CategoryID" selected="@(category.CategoryID == Model.CategoryID ? "selected" : null)">
+                            @category.CategoryName
+                        </option>
+                    }
+                </select>
+                <div class="invalid-feedback">
+                    Lütfen bir kategori seçin.
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>

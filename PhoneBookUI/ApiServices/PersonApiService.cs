@@ -22,6 +22,15 @@ namespace PhoneBookUI.ApiServices
 
             return await response.Content.ReadFromJsonAsync<IEnumerable<PersonDTO>>();
         }
+
+        public async Task<PersonDTO> GetPersonByID(int id)
+        {
+            var response = await _httpClient.GetAsync($"api/Persons/get-by-id/{id}");
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<PersonDTO>();
+        }
+
         public async Task<List<Category>> GetCategoriesAsync()
         {
             var response = await _httpClient.GetAsync("api/Categories/categories");
@@ -50,6 +59,12 @@ namespace PhoneBookUI.ApiServices
             
             var response = await _httpClient.PostAsJsonAsync("api/Categories/add-category", category);
 
+            response.EnsureSuccessStatusCode();
+        }
+
+        public async Task UpdatePersonAsync(PersonDTO person)
+        {
+            var response = await _httpClient.PutAsJsonAsync($"api/Persons/update-person/{person.PersonID}", person);
             response.EnsureSuccessStatusCode();
         }
     }
