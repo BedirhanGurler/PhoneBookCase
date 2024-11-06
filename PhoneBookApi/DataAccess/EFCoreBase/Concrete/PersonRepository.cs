@@ -13,6 +13,16 @@ namespace PhoneBookApi.DataAccess.EFCoreBase.Concrete
             _dbContext = dbContext;
         }
 
+        public async Task ActivatePerson(int id)
+        {
+            var person = await _dbContext.Persons.FindAsync(id);
+            if (person != null)
+            {
+                person.IsActive = true;
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
         public async Task CreateNewPerson(PersonDTO personDto)
         {
             var person = new Person
@@ -47,6 +57,11 @@ namespace PhoneBookApi.DataAccess.EFCoreBase.Concrete
         public IQueryable<Person> GetAllActivePersons()
         {
             return _dbContext.Persons.Include(p => p.Category).Where(p => p.IsActive);
+        }
+
+        public IQueryable<Person> GetAllInactivePersons()
+        {
+            return _dbContext.Persons.Include(p => p.Category).Where(p => !p.IsActive);
         }
 
         public async Task UpdatePerson(PersonDTO personDto)

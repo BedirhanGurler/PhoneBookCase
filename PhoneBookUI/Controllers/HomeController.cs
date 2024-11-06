@@ -24,6 +24,12 @@ namespace PhoneBookUI.Controllers
             return View(persons);
         }
 
+        public async Task<IActionResult> InActivePersonsPage()
+        {
+            var persons = await _service.GetAllInActivePersons();
+            return View(persons);
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -56,6 +62,13 @@ namespace PhoneBookUI.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ActivatePerson(int id)
+        {
+            await _service.ActivatePerson(id);
+            return RedirectToAction("InActivePersonsPage");
+        }
+
         public async Task<IActionResult> UpdatePersonPage(int id)
         {
             var person = await _service.GetPersonByID(id);
@@ -76,8 +89,6 @@ namespace PhoneBookUI.Controllers
             var categories = await _service.GetCategoriesAsync();
             ViewBag.Categories = categories;
             return RedirectToAction("Index");   
-
-
         }
 
         public async Task<IActionResult> AddCategoryPage()

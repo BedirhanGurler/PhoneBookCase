@@ -17,7 +17,15 @@ namespace PhoneBookUI.ApiServices
 
         public async Task<IEnumerable<PersonDTO>> GetAllActivePersons()
         {
-            var response = await _httpClient.GetAsync("api/Persons/get-active-persons");
+            var response = await _httpClient.GetAsync("api/Persons/active-persons");
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<IEnumerable<PersonDTO>>();
+        }
+
+        public async Task<IEnumerable<PersonDTO>> GetAllInActivePersons()
+        {
+            var response = await _httpClient.GetAsync("api/Persons/inactive-persons");
             response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadFromJsonAsync<IEnumerable<PersonDTO>>();
@@ -43,13 +51,19 @@ namespace PhoneBookUI.ApiServices
 
         public async Task AddPersonAsync(PersonDTO person)
         {
-            var response = await _httpClient.PostAsJsonAsync("api/Persons/add-new-person", person);
+            var response = await _httpClient.PostAsJsonAsync("api/Persons/new-person", person);
             response.EnsureSuccessStatusCode();
         }
 
         public async Task DeletePersonAsync(int id)
         {
             var response = await _httpClient.DeleteAsync($"api/Persons/delete-person/{id}");
+            response.EnsureSuccessStatusCode();
+        }
+
+        public async Task ActivatePerson(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"api/Persons/activate-person/{id}");
             response.EnsureSuccessStatusCode();
         }
 

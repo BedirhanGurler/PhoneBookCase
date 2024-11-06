@@ -18,11 +18,22 @@ namespace PhoneBookApi.Controllers
             _personService = personService;
         }
 
-        [HttpGet("get-active-persons")]
+        [HttpGet("active-persons")]
         public IActionResult GetAllActivePersons()
         {
             var persons = _personService.GetAllActivePersons().ToList();
             if(persons == null)
+            {
+                return NotFound();
+            }
+            return Ok(persons);
+        }
+
+        [HttpGet("inactive-persons")]
+        public IActionResult GetInActivePersons()
+        {
+            var persons = _personService.GetAllInactivePersons().ToList();
+            if (persons == null)
             {
                 return NotFound();
             }
@@ -40,7 +51,7 @@ namespace PhoneBookApi.Controllers
             return Ok(person);
         }
 
-        [HttpPost("add-new-person")]
+        [HttpPost("new-person")]
         public async Task<IActionResult> CreateNewPerson([FromBody] PersonDTO person)
         {
             var valid = new PersonValidator();
@@ -72,6 +83,13 @@ namespace PhoneBookApi.Controllers
         public async Task<IActionResult> DeletePersonById(int id)
         {
             await _personService.DeletePersonById(id);
+            return NoContent();
+        }
+
+        [HttpDelete("activate-person/{id}")]
+        public async Task<IActionResult> ActivatePerson(int id)
+        {
+            await _personService.ActivatePerson(id);
             return NoContent();
         }
     }
